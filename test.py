@@ -339,31 +339,31 @@ elif option == "Browse List":
             time.sleep(3)
             st.pyplot(generate_mfcc(file))
             disease=model_predict()
-                patient_info = {
-                    "name": name,
-                    "age": age,
-                    "gender": gender,
-                    "mobile": mobile_number
-                }
-                test_results = [
-                    {"disease": "COPD", "result": "Negative", "severity": "--"},
-                    {"disease": "Asthma", "result": "Negative", "severity": "--"},
-                    {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
-                    {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
-                    {"disease": "URTI", "result": "Negative", "severity": "--"},
-                    {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
-                    {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
-                ]
-                for test in test_results:
-                    if test['disease']==disease:
-                        test['result']='Positive'
-                        break
-                html = generate_html(patient_info, test_results)
-                generate_pdf(html)
+            patient_info = {
+                "name": name,
+                "age": age,
+                "gender": gender,
+                "mobile": mobile_number
+            }
+            test_results = [
+                {"disease": "COPD", "result": "Negative", "severity": "--"},
+                {"disease": "Asthma", "result": "Negative", "severity": "--"},
+                {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
+                {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
+                {"disease": "URTI", "result": "Negative", "severity": "--"},
+                {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
+                {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
+            ]
+            for test in test_results:
+                if test['disease']==disease:
+                    test['result']='Positive'
+                    break
+            html = generate_html(patient_info, test_results)
+            generate_pdf(html)
 
-                pdf_path = "Report.pdf"
-                with open(pdf_path, "rb") as f:
-                    pdf_bytes = f.read()
+            pdf_path = "Report.pdf"
+            with open(pdf_path, "rb") as f:
+                pdf_bytes = f.read()
 
-                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+            st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
