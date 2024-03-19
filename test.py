@@ -93,6 +93,129 @@ def build_mfcc(file_path):
     plt.close('all')
 
 
+def generate_html(patient_info, test_results):
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    body {{
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      margin: 0;
+      padding: 0;
+    }}
+
+    #header {{
+      background-color: #003366;
+      color: #ffffff;
+      padding: 10px;
+      text-align: center;
+    }}
+
+    .container {{
+      width: 100%;
+      background-color: #f2f2f2;
+      padding: 0px;
+    }}
+
+    .content {{
+      width: 50%;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 5px;
+      box-sizing: border-box;
+    }}
+
+    
+    table {{
+      border-collapse: collapse;
+      table-layout: auto;
+      width: 100%;
+    }}
+
+    th, td {{
+      border: 1px solid #dddddd;
+      padding: 8px;
+      text-align: left;
+    }}
+
+    th {{
+      background-color: #dddddd;
+      border: 1px solid #dddddd;
+      font-weight: bold;
+    }}
+
+    .positive-result td {{
+      background-color: #ffbdbd;
+    }}
+    </style>
+    </head>
+    <body>
+
+    <div id="header">
+      <h1>Medical Report</h1>
+    </div>
+
+    <div class="container">
+        <div class="content">
+          <h2>Patient Information</h2>
+          <p>Name: {patient_info['name']}</p>
+          <p>Age: {patient_info['age']}</p>
+          <p>Gender: {patient_info['gender']}</p>
+          <p>Mobile Number: {patient_info['mobile']}</p>
+
+      <h2>Test Results</h2>
+      <table id="testResults">
+        <thead>
+          <tr>
+            <th>S.NO</th>
+            <th>Disease</th>
+            <th>Result</th>
+            <th>Severity</th>
+          </tr>
+        </thead>
+        <tbody>
+    """
+
+    for index, result in enumerate(test_results, start=1):
+        html += f"""
+          <tr{' class="positive-result"' if result['result'] == "Positive" else ""}>
+            <td>{index}</td>
+            <td>{result['disease']}</td>
+            <td>{result['result']}</td>
+            <td>{result['severity']}</td>
+          </tr>
+        """
+
+    html += """
+        </tbody>
+      </table>
+
+      <h2>Recommendations</h2>
+      <p></p>
+        </div>
+    </div>
+
+    </body>
+    </html>
+    """
+
+    return html
+
+def generate_pdf(html_content):
+    # Save HTML content to a file
+    html_file = "medical_report.html"
+    with open(html_file, "w") as f:
+        f.write(html_content)
+    
+    # Convert HTML to PDF
+    result = BytesIO()
+    pisa.pisaDocument(BytesIO(html_content.encode('utf-8')), result)
+    with open('Report.pdf', "wb") as f:
+        f.write(result.getvalue())
+
+
 def model_predict():
     model = load_model('mfccall.h5')
     labels = np.load('labels.npy')
@@ -158,7 +281,34 @@ if option == "Upload Manually":
                 st.success('Generating MFCC..')
                 time.sleep(3)
                 st.pyplot(generate_mfcc(file))
-                model_predict()
+                disease=model_predict()
+                patient_info = {
+                    "name": name,
+                    "age": age,
+                    "gender": gender,
+                    "mobile": mobile_number
+                }
+                test_results = [
+                    {"disease": "COPD", "result": "Negative", "severity": "--"},
+                    {"disease": "Asthma", "result": "Negative", "severity": "--"},
+                    {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
+                    {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
+                    {"disease": "URTI", "result": "Negative", "severity": "--"},
+                    {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
+                    {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
+                ]
+                for test in test_results:
+                    if test['disease']==disease:
+                        test['result']='Positive'
+                        break
+                html = generate_html(patient_info, test_results)
+                generate_pdf(html)
+
+                pdf_path = "Report.pdf"
+                with open(pdf_path, "rb") as f:
+                    pdf_bytes = f.read()
+
+                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
 # If user chooses to browse the list
 elif option == "Browse List":
@@ -186,5 +336,32 @@ elif option == "Browse List":
             st.success('Generating MFCC..')
             time.sleep(3)
             st.pyplot(generate_mfcc(file))
-            model_predict()
+            disease=model_predict()
+                patient_info = {
+                    "name": name,
+                    "age": age,
+                    "gender": gender,
+                    "mobile": mobile_number
+                }
+                test_results = [
+                    {"disease": "COPD", "result": "Negative", "severity": "--"},
+                    {"disease": "Asthma", "result": "Negative", "severity": "--"},
+                    {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
+                    {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
+                    {"disease": "URTI", "result": "Negative", "severity": "--"},
+                    {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
+                    {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
+                ]
+                for test in test_results:
+                    if test['disease']==disease:
+                        test['result']='Positive'
+                        break
+                html = generate_html(patient_info, test_results)
+                generate_pdf(html)
+
+                pdf_path = "Report.pdf"
+                with open(pdf_path, "rb") as f:
+                    pdf_bytes = f.read()
+
+                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
