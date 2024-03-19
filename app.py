@@ -111,7 +111,7 @@ def generate_html(patient_info, test_results):
     #header {{
       background-color: #003366;
       color: #ffffff;
-      padding: 10px;
+      padding: 8px;
       text-align: center;
     }}
 
@@ -161,13 +161,13 @@ def generate_html(patient_info, test_results):
 
     <div class="container">
         <div class="content">
-          <h2>Patient Information</h2>
+          <h2>Patient Information:</h2>
           <p>Name: {patient_info['name']}</p>
           <p>Age: {patient_info['age']}</p>
           <p>Gender: {patient_info['gender']}</p>
           <p>Mobile Number: {patient_info['mobile']}</p>
 
-      <h2>Test Results</h2>
+      <h2>Test Results:</h2>
       <table id="testResults">
         <thead>
           <tr>
@@ -194,7 +194,7 @@ def generate_html(patient_info, test_results):
         </tbody>
       </table>
 
-      <h2>Recommendations</h2>
+      <h2>Remidies:</h2>
       <p></p>
         </div>
     </div>
