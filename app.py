@@ -241,7 +241,7 @@ def model_predict():
     labels_encoded = label_encoder.fit_transform(labels)
     predicted_class = label_encoder.inverse_transform([np.argmax(prediction)])
 
-    st.write(predicted_class[0])
+    return predicted_class[0]
 
 # Streamlit app title
 st.title("🫁 Lung Disease Detection 🫁")
