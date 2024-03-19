@@ -119,7 +119,7 @@ def model_predict():
     st.write(predicted_class[0])
 
 # Streamlit app title
-st.title("🩺🫁 Lung Disease Detection 🫁🩺")
+st.title("🫁 Lung Disease Detection 🫁")
 
 # Folder path where audio files are stored
 folder_path = 'audio'  # Replace 'path_to_your_folder' with the actual folder path
