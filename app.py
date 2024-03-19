@@ -103,7 +103,7 @@ def generate_html(patient_info, test_results):
     <style>
     body {{
       font-family: Arial, sans-serif;
-      font-size: 20px;
+      font-size: 15px;
       margin: 0;
       padding: 0;
     }}
