@@ -295,18 +295,19 @@ if option == "Upload Manually":
                     "mobile": mobile_number
                 }
                 test_results = [
-                    {"disease": "COPD", "result": "Negative", "severity": "--"},
-                    {"disease": "Asthma", "result": "Negative", "severity": "--"},
-                    {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
-                    {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
-                    {"disease": "URTI", "result": "Negative", "severity": "--"},
-                    {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
-                    {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
+                    {"disease": "COPD", "result": "", "severity": "--"},
+                    {"disease": "Asthma", "result": "", "severity": "--"},
+                    {"disease": "Bronchiectasis", "result": "", "severity": "--"},
+                    {"disease": "Bronchiolitis", "result": "", "severity": "--"},
+                    {"disease": "URTI", "result": "", "severity": "--"},
+                    {"disease": "LungFibrosis", "result": "", "severity": "--"},
+                    {"disease": "Pneumonia", "result": "", "severity": "--"}
                 ]
                 for test in test_results:
                     if test['disease']==disease:
                         test['result']='Positive'
-                        break
+                    else:
+                        test['result']='Negative'
                 html = generate_html(patient_info, test_results)
                 generate_pdf(html)
 
@@ -350,18 +351,19 @@ elif option == "Browse List":
                 "mobile": mobile_number
             }
             test_results = [
-                {"disease": "COPD", "result": "Negative", "severity": "--"},
-                {"disease": "Asthma", "result": "Negative", "severity": "--"},
-                {"disease": "Bronchiectasis", "result": "Negative", "severity": "--"},
-                {"disease": "Bronchiolitis", "result": "Negative", "severity": "--"},
-                {"disease": "URTI", "result": "Negative", "severity": "--"},
-                {"disease": "LungFibrosis", "result": "Negative", "severity": "--"},
-                {"disease": "Pneumonia", "result": "Negative", "severity": "--"}
+                {"disease": "COPD", "result": "", "severity": "--"},
+                {"disease": "Asthma", "result": "", "severity": "--"},
+                {"disease": "Bronchiectasis", "result": "", "severity": "--"},
+                {"disease": "Bronchiolitis", "result": "", "severity": "--"},
+                {"disease": "URTI", "result": "", "severity": "--"},
+                {"disease": "LungFibrosis", "result": "", "severity": "--"},
+                {"disease": "Pneumonia", "result": "", "severity": "--"}
             ]
             for test in test_results:
                 if test['disease']==disease:
                     test['result']='Positive'
-                    break
+                else:
+                    test['result']='Negative'
             html = generate_html(patient_info, test_results)
             generate_pdf(html)
 
