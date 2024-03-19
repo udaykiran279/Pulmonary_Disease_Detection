@@ -103,7 +103,7 @@ def generate_html(patient_info, test_results):
     <style>
     body {{
       font-family: Arial, sans-serif;
-      font-size: 15px;
+      font-size: 17px;
       margin: 0;
       padding: 0;
     }}
@@ -111,7 +111,7 @@ def generate_html(patient_info, test_results):
     #header {{
       background-color: #003366;
       color: #ffffff;
-      padding: 12px;
+      padding: 15px;
       text-align: center;
     }}
 
@@ -157,7 +157,6 @@ def generate_html(patient_info, test_results):
 
     <div id="header">
       <h1>Medical Report</h1>
-      <h4>Uday Labs</h4>
     </div>
 
     <div class="container">
