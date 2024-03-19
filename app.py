@@ -157,6 +157,7 @@ def generate_html(patient_info, test_results):
 
     <div id="header">
       <h1>Medical Report</h1>
+      <h4>Uday Labs</h4>
     </div>
 
     <div class="container">
