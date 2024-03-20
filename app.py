@@ -224,48 +224,36 @@ def generate_pdf(html_content):
         f.write(result.getvalue())
 
 
-def send_mail(mail_id,name,pdf_path):
+def send_email_with_attachment(sender_email, sender_password, receiver_email, subject, body, attachment_path):
     # Create a multipart message
-    sender_email = "udaylabs27@gmail.com"
-    sender_password = "qpku hfol hlsm ddqw"
-    current_datetime = datetime.now()
-    subject = f"Medical Report of {name}"
-    body = f"""
-        Dear {name},
-
-        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
-        
-        Best regards,
-        Uday Labs
-    """
-    attachment_path = pdf_path
-    
     message = MIMEMultipart()
     message["From"] = sender_email
-    message["To"] = mail_id
+    message["To"] = receiver_email
     message["Subject"] = subject
-
+    
     # Attach body
     message.attach(MIMEText(body, "plain"))
-
+    
     # Open PDF file to be attached
     with open(attachment_path, "rb") as attachment:
         part = MIMEBase("application", "octet-stream")
         part.set_payload(attachment.read())
-
+    
     # Encode the attachment
     encoders.encode_base64(part)
-
+    
     # Add header
     part.add_header("Content-Disposition", f"attachment; filename= {attachment_path}")
-
+    
     # Add attachment to message
     message.attach(part)
-
+    
     # Connect to SMTP server and send email
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender_email, sender_password)
-        server.sendmail(sender_email, mail_id, message.as_string())
+        server.sendmail(sender_email, receiver_email, message.as_string())
+    
+    st.success("Report Sent to Your mail")
 
     
 
@@ -369,8 +357,19 @@ if option == "Upload Manually":
 
                 mail_id=st.text_input("Enter your mail to Download Report")
                 if mail_id is not None:
-                    send_mail(mail_id,name,pdf_path)
-                    st.success("Report sent to your mail")
+                    sender_email = "udaylabs27@gmail.com"
+                    sender_password = "qpku hfol hlsm ddqw"
+                    current_datetime = datetime.now()
+                    subject = f"Medical Report of {name}"
+                    body = f"""
+                        Dear {name},
+                
+                        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+                        
+                        Best regards,
+                        Uday Labs
+                    """
+                    send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
                     time.sleep(2)
                     st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
@@ -429,8 +428,19 @@ elif option == "Browse List":
                 pdf_bytes = f.read()
             mail_id=st.text_input("Enter your mail to Download Report")
             if mail_id is not None:
-                send_mail(mail_id,name,pdf_path)
-                st.success("Report sent to your mail")
-                time.sleep(2)
-                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+                sender_email = "udaylabs27@gmail.com"
+                    sender_password = "qpku hfol hlsm ddqw"
+                    current_datetime = datetime.now()
+                    subject = f"Medical Report of {name}"
+                    body = f"""
+                        Dear {name},
+                
+                        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+                        
+                        Best regards,
+                        Uday Labs
+                    """
+                    send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
+                    time.sleep(2)
+                    st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
