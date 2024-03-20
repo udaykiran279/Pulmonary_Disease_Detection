@@ -359,7 +359,7 @@ if option == "Upload Manually":
                 if mail_id is not None:
                     sender_email = "udaylabs27@gmail.com"
                 sender_password = "qpku hfol hlsm ddqw"
-                receiver_email = "udaykirannaidu18@gmail.com
+                receiver_email = "udaykirannaidu18@gmail.com"
                 current_datetime = datetime.now()
                 subject = f"Medical Report of {name}"
                 body = f"""
@@ -431,7 +431,7 @@ elif option == "Browse List":
             if mail_id is not None:
                 sender_email = "udaylabs27@gmail.com"
                 sender_password = "qpku hfol hlsm ddqw"
-                receiver_email = "udaykirannaidu18@gmail.com
+                receiver_email = "udaykirannaidu18@gmail.com"
                 current_datetime = datetime.now()
                 subject = f"Medical Report of {name}"
                 body = f"""
