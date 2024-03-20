@@ -242,7 +242,7 @@ def send_mail(mail_id,name,pdf_path):
     
     message = MIMEMultipart()
     message["From"] = sender_email
-    message["To"] = maild_id
+    message["To"] = mail_id
     message["Subject"] = subject
 
     # Attach body
