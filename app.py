@@ -255,7 +255,7 @@ def send_email_with_attachment(mail_id,name,pdf_path):
     encoders.encode_base64(part)
     
     # Add header
-    part.add_header("Content-Disposition", f"attachment; filename= {attachment_path}")
+    part.add_header("Content-Disposition", f"attachment; filename= {attachment_path.split('/')[1]}")
     
     # Add attachment to message
     message.attach(part)
@@ -365,7 +365,7 @@ if option == "Upload Manually":
                 html = generate_html(patient_info, test_results)
                 generate_pdf(html)
 
-                pdf_path = "Report.pdf"
+                pdf_path = "Report/Report.pdf"
                 with open(pdf_path, "rb") as f:
                     pdf_bytes = f.read()
                 
