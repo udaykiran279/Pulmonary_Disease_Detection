@@ -247,15 +247,15 @@ def send_email_with_attachment(mail_id,name,pdf_path):
     message.attach(MIMEText(body, "plain"))
     
     # Open PDF file to be attached
-    with open(attachment_path, "rb") as attachment:
+    with open(pdf_path, "rb") as f:
         part = MIMEBase("application", "octet-stream")
-        part.set_payload(attachment.read())
+        part.set_payload(f.read())
     
     # Encode the attachment
     encoders.encode_base64(part)
     
     # Add header
-    part.add_header("Content-Disposition", f"attachment; filename= {attachment_path.split('/')[1]}")
+    part.add_header("Content-Disposition", f"attachment; filename= {pdf_path.split('/')[1]}")
     
     # Add attachment to message
     message.attach(part)
