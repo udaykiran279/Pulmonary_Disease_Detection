@@ -232,7 +232,8 @@ def send_email_with_attachment(mail_id,name,pdf_path):
     subject = f"Medical Report of {name}"
     body = f"""
     Dear {name},
-    Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+    
+    Thank you for visiting Uday Labs. Please find the attached medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
     
     Best regards,
     Uday Labs
