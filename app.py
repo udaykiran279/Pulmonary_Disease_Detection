@@ -429,18 +429,18 @@ elif option == "Browse List":
             mail_id=st.text_input("Enter your mail to Download Report")
             if mail_id is not None:
                 sender_email = "udaylabs27@gmail.com"
-                    sender_password = "qpku hfol hlsm ddqw"
-                    current_datetime = datetime.now()
-                    subject = f"Medical Report of {name}"
-                    body = f"""
-                        Dear {name},
-                
-                        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
-                        
-                        Best regards,
-                        Uday Labs
-                    """
-                    send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
-                    time.sleep(2)
-                    st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+                sender_password = "qpku hfol hlsm ddqw"
+                current_datetime = datetime.now()
+                subject = f"Medical Report of {name}"
+                body = f"""
+                    Dear {name},
+            
+                    I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+                    
+                    Best regards,
+                    Uday Labs
+                """
+                send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
+                time.sleep(2)
+                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
