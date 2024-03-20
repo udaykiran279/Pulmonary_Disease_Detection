@@ -265,7 +265,7 @@ def send_mail(mail_id,name,pdf_path):
     # Connect to SMTP server and send email
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender_email, sender_password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
+        server.sendmail(sender_email, mail_id, message.as_string())
 
     
 
