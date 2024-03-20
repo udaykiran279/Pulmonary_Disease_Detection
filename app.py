@@ -10,6 +10,12 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import scipy.signal as signal
 from scipy.io.wavfile import write
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+from datetime import datetime
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.models import load_model
@@ -218,6 +224,52 @@ def generate_pdf(html_content):
         f.write(result.getvalue())
 
 
+def send_mail(mail_id,name,pdf_path):
+    # Create a multipart message
+    sender_email = "udaylabs27@gmail.com"
+    sender_password = "qpku hfol hlsm ddqw"
+    current_datetime = datetime.now()
+    subject = f"Medical Report of {name}"
+    body = f"""
+        Dear {name},
+
+        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+        
+        Best regards,
+        Uday Labs
+    """
+    attachment_path = pdf_path
+    
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = maild_id
+    message["Subject"] = subject
+
+    # Attach body
+    message.attach(MIMEText(body, "plain"))
+
+    # Open PDF file to be attached
+    with open(attachment_path, "rb") as attachment:
+        part = MIMEBase("application", "octet-stream")
+        part.set_payload(attachment.read())
+
+    # Encode the attachment
+    encoders.encode_base64(part)
+
+    # Add header
+    part.add_header("Content-Disposition", f"attachment; filename= {attachment_path}")
+
+    # Add attachment to message
+    message.attach(part)
+
+    # Connect to SMTP server and send email
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+
+    
+
+
 def model_predict():
     model = load_model('mfccall.h5')
     labels = np.load('labels.npy')
@@ -315,7 +367,12 @@ if option == "Upload Manually":
                 with open(pdf_path, "rb") as f:
                     pdf_bytes = f.read()
 
-                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+                mail_id=st.text_input("Enter your mail to Download Report")
+                if mail_id is not None:
+                    send_mail(mail_id,name,pdf_path)
+                    st.success("Report sent to your mail")
+                    time.sleep(2)
+                    st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
 # If user chooses to browse the list
 elif option == "Browse List":
@@ -370,6 +427,10 @@ elif option == "Browse List":
             pdf_path = "Report.pdf"
             with open(pdf_path, "rb") as f:
                 pdf_bytes = f.read()
-
-            st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+            mail_id=st.text_input("Enter your mail to Download Report")
+            if mail_id is not None:
+                send_mail(mail_id,name,pdf_path)
+                st.success("Report sent to your mail")
+                time.sleep(2)
+                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
