@@ -220,7 +220,7 @@ def generate_pdf(html_content):
     # Convert HTML to PDF
     result = BytesIO()
     pisa.pisaDocument(BytesIO(html_content.encode('utf-8')), result)
-    with open('Report.pdf', "wb") as f:
+    with open('Report/Report.pdf', "wb") as f:
         f.write(result.getvalue())
 
 
@@ -363,7 +363,7 @@ if option == "Upload Manually":
                 html = generate_html(patient_info, test_results)
                 generate_pdf(html)
 
-                pdf_path = "Report.pdf"
+                pdf_path = "Report/Report.pdf"
                 with open(pdf_path, "rb") as f:
                     pdf_bytes = f.read()
 
@@ -424,7 +424,7 @@ elif option == "Browse List":
             html = generate_html(patient_info, test_results)
             generate_pdf(html)
 
-            pdf_path = "Report.pdf"
+            pdf_path = "Report/Report.pdf"
             with open(pdf_path, "rb") as f:
                 pdf_bytes = f.read()
             mail_id=st.text_input("Enter your mail to Download Report")
