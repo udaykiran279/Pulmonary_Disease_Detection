@@ -362,12 +362,12 @@ if option == "Upload Manually":
                     current_datetime = datetime.now()
                     subject = f"Medical Report of {name}"
                     body = f"""
-                        Dear {name},
-                
-                        I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
-                        
-                        Best regards,
-                        Uday Labs
+                    Dear {name},
+            
+                    Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+                    
+                    Best regards,
+                    Uday Labs
                     """
                     send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
                     time.sleep(2)
@@ -433,12 +433,12 @@ elif option == "Browse List":
                 current_datetime = datetime.now()
                 subject = f"Medical Report of {name}"
                 body = f"""
-                    Dear {name},
-            
-                    I hope this email finds you well. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
-                    
-                    Best regards,
-                    Uday Labs
+                Dear {name},
+        
+                Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+                
+                Best regards,
+                Uday Labs
                 """
                 send_email_with_attachment(sender_email, sender_password, mail_id, subject, body, pdf_path)
                 time.sleep(2)
