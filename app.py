@@ -224,11 +224,23 @@ def generate_pdf(html_content):
         f.write(result.getvalue())
 
 
-def send_email_with_attachment(sender_email, sender_password, receiver_email, subject, body, attachment_path):
+def send_email_with_attachment(mail_id,name,pdf_path):
+    sender_email = "udaylabs27@gmail.com"
+    sender_password = "qpku hfol hlsm ddqw"
+    receiver_email = mail_id
+    current_datetime = datetime.now()
+    subject = f"Medical Report of {name}"
+    body = f"""
+    Dear {name},
+    Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+    
+    Best regards,
+    Uday Labs
+    """
     # Create a multipart message
     message = MIMEMultipart()
     message["From"] = sender_email
-    message["To"] = receiver_email
+    message["To"] = mail_id
     message["Subject"] = subject
     
     # Attach body
@@ -251,7 +263,7 @@ def send_email_with_attachment(sender_email, sender_password, receiver_email, su
     # Connect to SMTP server and send email
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender_email, sender_password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
+        server.sendmail(sender_email, mail_id, message.as_string())
     
     st.success("Report Sent to Your mail")
 
@@ -295,6 +307,8 @@ name = st.text_input("Enter your Name")
 age = st.text_input("Enter your Age")
 gender = st.selectbox("select your Gender", ["---","Male", "Female", "Other"])
 mobile_number = st.text_input("Enter your Mobile Number")
+mail_id=st.text_input("Enter Your mail ID")
+mail_id=mail_id.lower()
 
 # Display buttons to either upload or browse audio files
 option = st.radio("Select an option", ("Upload Manually", "Browse List"))
@@ -351,26 +365,11 @@ if option == "Upload Manually":
                 html = generate_html(patient_info, test_results)
                 generate_pdf(html)
 
-                pdf_path = "Report/Report.pdf"
+                pdf_path = "Report.pdf"
                 with open(pdf_path, "rb") as f:
                     pdf_bytes = f.read()
-
-                mail_id=st.text_input("Enter your mail to Download Report")
-                if mail_id is not None:
-                    sender_email = "udaylabs27@gmail.com"
-                sender_password = "qpku hfol hlsm ddqw"
-                receiver_email = "udaykirannaidu18@gmail.com"
-                current_datetime = datetime.now()
-                subject = f"Medical Report of {name}"
-                body = f"""
-                Dear {name},
-        
-                Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
                 
-                Best regards,
-                Uday Labs
-                """
-                send_email_with_attachment(sender_email, sender_password, receiver_email, subject, body, pdf_path)
+                send_email_with_attachment(mail_id,namepdf_path)
                 time.sleep(2)
                 st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
                 
@@ -424,25 +423,10 @@ elif option == "Browse List":
             html = generate_html(patient_info, test_results)
             generate_pdf(html)
 
-            pdf_path = "Report/Report.pdf"
+            pdf_path = "Report.pdf"
             with open(pdf_path, "rb") as f:
                 pdf_bytes = f.read()
-            mail_id=st.text_input("Enter your mail to Download Report")
-            if mail_id is not None:
-                sender_email = "udaylabs27@gmail.com"
-                sender_password = "qpku hfol hlsm ddqw"
-                receiver_email = "udaykirannaidu18@gmail.com"
-                current_datetime = datetime.now()
-                subject = f"Medical Report of {name}"
-                body = f"""
-                Dear {name},
-        
-                Thank you for visiting Uday Labs. Please find attached the medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
-                
-                Best regards,
-                Uday Labs
-                """
-                send_email_with_attachment(sender_email, sender_password, receiver_email, subject, body, pdf_path)
-                time.sleep(2)
-                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+            send_email_with_attachment(mail_id,name,pdf_path)
+            time.sleep(2)
+            st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
 
