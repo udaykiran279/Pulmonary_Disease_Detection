@@ -424,7 +424,7 @@ elif option == "Browse List":
             html = generate_html(patient_info, test_results)
             generate_pdf(html)
 
-            pdf_path = "Report.pdf"
+            pdf_path = "Report/Report.pdf"
             with open(pdf_path, "rb") as f:
                 pdf_bytes = f.read()
             send_email_with_attachment(mail_id,name,pdf_path)
