@@ -369,7 +369,7 @@ if option == "Upload Manually":
                 with open(pdf_path, "rb") as f:
                     pdf_bytes = f.read()
                 
-                send_email_with_attachment(mail_id,namepdf_path)
+                send_email_with_attachment(mail_id,name,pdf_path)
                 time.sleep(2)
                 st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
                 
