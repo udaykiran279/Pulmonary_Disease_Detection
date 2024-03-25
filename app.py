@@ -157,6 +157,15 @@ def generate_html(patient_info, test_results):
     .positive-result td {{
       background-color: #ffbdbd;
     }}
+    footer {{
+      background-color: #003366;
+      color: #ffffff;
+      padding: 15px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }}
     </style>
     </head>
     <body>
@@ -204,6 +213,9 @@ def generate_html(patient_info, test_results):
       <p></p>
         </div>
     </div>
+    <footer>
+      <p>Disclaimer: This medical report is machine predicted.</p>
+    </footer>
 
     </body>
     </html>
