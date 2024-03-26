@@ -102,7 +102,7 @@ def build_mfcc(file_path):
     plt.close('all')
 
 
-def generate_html(patient_info, test_results,rem,med):
+def generate_html(patient_info, test_results,data):
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -110,7 +110,7 @@ def generate_html(patient_info, test_results,rem,med):
     <style>
     body {{
       font-family: Arial, sans-serif;
-      font-size: 17px;
+      font-size: 13px;
       margin: 0;
       padding: 0;
     }}
@@ -206,14 +206,14 @@ def generate_html(patient_info, test_results,rem,med):
           </tr>
         """
 
-    html += """
+    html += f"""
         </tbody>
       </table>
 
       <h2>Remidies:</h2>
-      <p>{rem}</p>
+      <p>{data['rem']}</p>
       <h2>Medicines:</h2>
-      <p>{med}</p>
+      <p>{data['med']}</p>
         </div>
     </div>
     <footer>
@@ -381,7 +381,11 @@ if option == "Upload Manually":
                 df=pd.read_csv("medical.csv")
                 rem=df[df['Disease']==disease]['Remedies']
                 med=df[df['Disease']==disease]['Medicines']
-                html = generate_html(patient_info, test_results,rem,med)
+                data={
+                    "rem":rem,
+                    "med":med
+                }
+                html = generate_html(patient_info, test_results,data)
                 generate_pdf(html)
 
                 pdf_path = "Report/Report.pdf"
@@ -442,7 +446,11 @@ elif option == "Browse List":
             df=pd.read_csv("medical.csv")
             rem=df[df['Disease']==disease]['Remedies']
             med=df[df['Disease']==disease]['Medicines']
-            html = generate_html(patient_info, test_results,rem,med)
+            data={
+                "rem":rem,
+                "med":med
+            }
+            html = generate_html(patient_info, test_results,data)
             generate_pdf(html)
 
             pdf_path = "Report/Report.pdf"
