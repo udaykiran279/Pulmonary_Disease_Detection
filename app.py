@@ -207,7 +207,7 @@ def generate_html(patient_info, test_results,data):
         </tbody>
       </table>
 
-      <h2>Remidies:</h2>
+      <h2>Remedies:</h2>
       <p>{data['rem']}</p>
       <h2>Medicines:</h2>
       <p>{data['med']}</p>
@@ -310,10 +310,27 @@ def model_predict():
 
     return predicted_class[0]
 
-
+rem={
+    'COPD':'Quit smoking, Healthy diet, Manage Stress, Stay Hydrated',
+    'Pneumonia':'Rest, Hydration,Control Fever and Pain,Use a Humidifier,Avoid Smoke and Irritants',
+    'LungFibrosis':'Oxygen Therapy, Nutrition, Hydration, palliative care, Emotional support, Lung transplantation',
+    'URTI':'Gargle with Warm salt water, steam,rest, hydration, use honey,warm compresses, elevate your head, take garlic.',
+    'Bronchiectasis':'Airway clearance techniques, Immunizations,Nutritious diet, stay hydrated, Regular exercise',
+    'Bronchiolitis':'elevate head position, avoid smoke exposure, practice good hand hygiene,use a humidifier and maintain Hydration.',
+    'Asthma':'stay active, maintain a healthy weight, quit smoking. Use asthma inhalers correctly, monitor peak flow'
+}
+med={
+    'COPD':'bronchodilators,Corticosteroids,Methylxanthines,Roflumilast',
+    'Pneumonia':'Fluoroquinolones, Cephalosporins, Macrolides, Monobactams, Antibiotics, Lincosamide, Tetracyclines, Carbapenems, Oxazolidinones, Aminoglycosides, Penicillins, Amino, Penicillins.',
+    'LungFibrosis':'nintedanib,pirfenidone',
+    'URTI':'Penicillin VK, Amoxicillin,pencillin G, Cefadroxil, Erythromycin and clavulanate',
+    'Bronchiectasis':'Amoxicillin 500mg ,Clarithromycin 500mg,doxycycline and ciprofloxacin',
+    'Bronchiolitis':'aerosolized ribavirin,bronchodilators and corticosteroids',
+    'Asthma':'Fluticasone (Flovent HFA, Arnuity Ellipta, others),Budesonide (Pulmicort Flexhaler), Mometasone (Asmanex Twisthaler),Beclomethasone (Qvar RediHaler),Ciclesonide (Alvesco)'
+}
 
 # Streamlit app title
-st.title("🫁 Lung Disease Detection 🫁")
+st.title("Lung 🫁 Disease Detection")
 
 # Folder path where audio files are stored
 folder_path = 'audio'  # Replace 'path_to_your_folder' with the actual folder path
@@ -379,17 +396,16 @@ if option == "Upload Manually":
                         test['result']='Positive'
                     else:
                         test['result']='Negative'
-                df=pd.read_csv("medical.csv")
                 if disease!='Healthy':
-                    rem=df[df['Disease']==disease]['Remedies'][0]
-                    med=df[df['Disease']==disease]['Medicines'][0]
+                    remedi=rem[disease]
+                    medicine=med[disease]
                 else:
                     rem="You are healthy,Maintain same diet and also be far from smoking as you are now."
                     med="-- Not Applicable --"
                     
                 data={
-                    "rem":rem,
-                    "med":med
+                    "rem":remedi,
+                    "med":medicine
                 }
                 html = generate_html(patient_info, test_results,data)
                 generate_pdf(html)
@@ -449,17 +465,16 @@ elif option == "Browse List":
                     test['result']='Positive'
                 else:
                     test['result']='Negative'
-            df=pd.read_csv("medical.csv")
             if disease!='Healthy':
-                rem=df[df['Disease']==disease]['Remedies'][0]
-                med=df[df['Disease']==disease]['Medicines'][0]
+                remedi=rem[disease]
+                medicine=med[disease]
             else:
                 rem="You are healthy,Maintain same diet and also be far from smoking as you are now."
                 med="-- Not Applicable --"
-                    
+                
             data={
-                "rem":rem,
-                "med":med
+                "rem":remedi,
+                "med":medicine
             }
             html = generate_html(patient_info, test_results,data)
             generate_pdf(html)
