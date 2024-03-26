@@ -442,7 +442,7 @@ elif option == "Browse List":
             df=pd.read_csv("medical.csv")
             rem=df[df['Disease']==disease]['Remedies']
             med=df[df['Disease']==disease]['Medicines']
-            html = generate_html(patient_info, test_results)
+            html = generate_html(patient_info, test_results,rem,med)
             generate_pdf(html)
 
             pdf_path = "Report/Report.pdf"
