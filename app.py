@@ -177,9 +177,9 @@ def generate_html(patient_info, test_results,data):
     <div class="container">
         <div class="content">
           <h2>Patient Information:</h2>
-          <p><b>Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['name']}</p>
-          <p><b>Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['age']}</p>
-          <p><b>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['gender']}</p>
+          <p><b>Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['name']}</p>
+          <p><b>Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['age']}</p>
+          <p><b>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['gender']}</p>
           <p><b>Mobile Number:</b> {patient_info['mobile']}</p>
 
       <h2>Test Results:</h2>
