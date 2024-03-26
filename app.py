@@ -110,7 +110,7 @@ def generate_html(patient_info, test_results,data):
     <style>
     body {{
       font-family: Arial, sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       margin: 0;
       padding: 0;
     }}
@@ -161,10 +161,10 @@ def generate_html(patient_info, test_results,data):
     footer {{
       background-color: #003366;
       color: #ffffff;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
       position: fixed;
-      bottom: 0;
+      bottom: 20%;
       width: 100%;
     }}
     </style>
