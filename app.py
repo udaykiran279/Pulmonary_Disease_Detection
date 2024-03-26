@@ -314,11 +314,11 @@ def model_predict():
     new_feat= scaler.fit_transform(feat)
     new_clusters = kmeans.predict(new_feat)[0]
     severity={
-        '1':'Mild',
-        '2':'Moderate',
-        '3':'Severe'
+        1:'Mild',
+        2:'Moderate',
+        3:'Severe'
     }
-    return predicted_class[0],severity[new_clusters]
+    return [predicted_class[0],severity[new_clusters]]
 
 # storing remedies and medicines
 rem={
