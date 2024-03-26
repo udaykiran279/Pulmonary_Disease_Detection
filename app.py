@@ -7,6 +7,7 @@ from io import BytesIO
 from xhtml2pdf import pisa
 import librosa.display
 from jinja2 import Template
+import pickle
 import streamlit as st
 import matplotlib.pyplot as plt
 import scipy.signal as signal
@@ -305,8 +306,20 @@ def model_predict():
     labels_encoded = label_encoder.fit_transform(labels)
     predicted_class = label_encoder.inverse_transform([np.argmax(prediction)])
 
-    return predicted_class[0]
+    scaler = StandardScaler()
+    with open('kmeans_model.pkl', 'rb') as f:
+        kmeans = pickle.load(f)
+    feat=features.reshape(features.shape[0], -1)
+    new_feat= scaler.transform(feat)
+    new_clusters = kmeans.predict(new_feat)[0]
+    severity={
+        '1':'Mild',
+        '2':'Moderate',
+        '3':'Severe'
+    }
+    return [predicted_class[0],severity[new_clusters]]
 
+# storing remedies and medicines
 rem={
     'COPD':'Quit smoking, Healthy diet, Manage Stress, Stay Hydrated',
     'Pneumonia':'Rest, Hydration,Control Fever and Pain,Use a Humidifier,Avoid Smoke and Irritants',
@@ -372,7 +385,9 @@ if option == "Upload Manually":
                 st.success('Generating MFCC..')
                 time.sleep(3)
                 st.pyplot(generate_mfcc(file))
-                disease=model_predict()
+                model_pred=model_predict()
+                disease=model_pred[0]
+                sever=model_pred[1]
                 patient_info = {
                     "name": name,
                     "age": age,
@@ -391,6 +406,7 @@ if option == "Upload Manually":
                 for test in test_results:
                     if test['disease']==disease:
                         test['result']='Positive'
+                        test['severity']=sever
                     else:
                         test['result']='Negative'
                 if disease!='Healthy':
@@ -441,7 +457,9 @@ elif option == "Browse List":
             st.success('Generating MFCC..')
             time.sleep(3)
             st.pyplot(generate_mfcc(file))
-            disease=model_predict()
+            model_pred=model_predict()
+            disease=model_pred[0]
+            sever=model_pred[1]
             patient_info = {
                 "name": name,
                 "age": age,
@@ -460,6 +478,7 @@ elif option == "Browse List":
             for test in test_results:
                 if test['disease']==disease:
                     test['result']='Positive'
+                    test['severity']=sever
                 else:
                     test['result']='Negative'
             if disease!='Healthy':
@@ -479,6 +498,7 @@ elif option == "Browse List":
             pdf_path = "Report/Report.pdf"
             with open(pdf_path, "rb") as f:
                 pdf_bytes = f.read()
+            
             send_email_with_attachment(mail_id,name,pdf_path)
             time.sleep(2)
             st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
