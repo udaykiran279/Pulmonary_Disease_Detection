@@ -160,7 +160,7 @@ def generate_html(patient_info, test_results,data):
     }}
     footer {{
       color: black;
-      padding: 15px;
+      padding: 30px;
       text-align: center;
       width: 100%;
     }}
