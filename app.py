@@ -310,6 +310,8 @@ def model_predict():
 
     return predicted_class[0]
 
+
+
 # Streamlit app title
 st.title("🫁 Lung Disease Detection 🫁")
 
