@@ -318,7 +318,7 @@ def model_predict():
         '2':'Moderate',
         '3':'Severe'
     }
-    return [predicted_class[0],severity[new_clusters]]
+    return predicted_class[0],severity[new_clusters]
 
 # storing remedies and medicines
 rem={
