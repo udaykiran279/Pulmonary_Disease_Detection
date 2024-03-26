@@ -3,6 +3,8 @@ import time
 import shutil
 import numpy as np
 import pandas as pd
+import cv2
+from PIL import Image
 from io import BytesIO
 from xhtml2pdf import pisa
 import librosa.display
