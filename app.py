@@ -311,7 +311,7 @@ def model_predict():
     with open('kmeans_model.pkl', 'rb') as f:
         kmeans = pickle.load(f)
     feat=features.reshape(features.shape[0], -1)
-    new_feat= scaler.transform(feat)
+    new_feat= scaler.fit_transform(feat)
     new_clusters = kmeans.predict(new_feat)[0]
     severity={
         '1':'Mild',
