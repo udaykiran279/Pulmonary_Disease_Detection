@@ -379,8 +379,13 @@ if option == "Upload Manually":
                     else:
                         test['result']='Negative'
                 df=pd.read_csv("medical.csv")
-                rem=df[df['Disease']==disease]['Remedies']
-                med=df[df['Disease']==disease]['Medicines']
+                if disease!='Healthy':
+                    rem=df[df['Disease']==disease]['Remedies'][0]
+                    med=df[df['Disease']==disease]['Medicines'][0]
+                else:
+                    rem="You are healthy,Maintain same diet and also be far from smoking as you are now."
+                    med="-- Not Applicable --"
+                    
                 data={
                     "rem":rem,
                     "med":med
