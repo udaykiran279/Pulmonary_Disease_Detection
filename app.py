@@ -161,7 +161,7 @@ def generate_html(patient_info, test_results,data):
     footer {{
       background-color: #003366;
       color: #ffffff;
-      padding: 10px;
+      padding: 20px;
       text-align: left;
       position: fixed;
       bottom: 0;
