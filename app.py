@@ -164,7 +164,7 @@ def generate_html(patient_info, test_results,data):
       padding: 10px;
       text-align: center;
       position: fixed;
-      bottom: 20%;
+      bottom: 0;
       width: 100%;
     }}
     </style>
