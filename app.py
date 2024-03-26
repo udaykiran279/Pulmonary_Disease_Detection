@@ -145,7 +145,7 @@ def generate_html(patient_info, test_results,data):
 
     th, td {{
       border: 1px solid #dddddd;
-      padding: 8px;
+      padding: 5px;
       text-align: left;
     }}
 
