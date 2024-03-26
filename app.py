@@ -132,7 +132,7 @@ def generate_html(patient_info, test_results,data):
       width: 50%;
       margin: 0 auto;
       background-color: #fff;
-      padding: 5px;
+      padding: 3px;
       box-sizing: border-box;
     }}
 
