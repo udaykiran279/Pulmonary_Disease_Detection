@@ -215,7 +215,7 @@ def generate_html(patient_info, test_results,data):
     </div>
     <br>
     <footer>
-      <p>Disclaimer: This medical report is Machine predicted.</p>
+      <p><b>Disclaimer: This medical report is Machine predicted.</b></p>
     </footer>
 
     </body>
