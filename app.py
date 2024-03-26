@@ -439,6 +439,9 @@ elif option == "Browse List":
                     test['result']='Positive'
                 else:
                     test['result']='Negative'
+            df=pd.read_csv("medical.csv")
+            rem=df[df['Disease']==disease]['Remedies']
+            med=df[df['Disease']==disease]['Medicines']
             html = generate_html(patient_info, test_results)
             generate_pdf(html)
 
