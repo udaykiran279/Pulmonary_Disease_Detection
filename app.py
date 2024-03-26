@@ -9,6 +9,7 @@ import librosa.display
 from jinja2 import Template
 import pickle
 import streamlit as st
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import scipy.signal as signal
 from scipy.io.wavfile import write
