@@ -414,8 +414,8 @@ if option == "Upload Manually":
                     remedi=rem[disease]
                     medicine=med[disease]
                 else:
-                    rem="You are healthy,Maintain same diet and also be far from smoking as you are now."
-                    med="-- Not Applicable --"
+                    remedi="You are healthy,Maintain same diet and also be far from smoking as you are now."
+                    medicine="-- Not Applicable --"
                     
                 data={
                     "rem":remedi,
@@ -486,8 +486,8 @@ elif option == "Browse List":
                 remedi=rem[disease]
                 medicine=med[disease]
             else:
-                rem="You are healthy,Maintain same diet and also be far from smoking as you are now."
-                med="-- Not Applicable --"
+                remedi="You are healthy,Maintain same diet and also be far from smoking as you are now."
+                medicine="-- Not Applicable --"
                 
             data={
                 "rem":remedi,
