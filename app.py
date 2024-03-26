@@ -2,6 +2,7 @@ import os
 import time
 import shutil
 import numpy as np
+import pandas as pd
 from io import BytesIO
 from xhtml2pdf import pisa
 import librosa.display
@@ -101,7 +102,7 @@ def build_mfcc(file_path):
     plt.close('all')
 
 
-def generate_html(patient_info, test_results):
+def generate_html(patient_info, test_results,rem,med):
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -210,11 +211,13 @@ def generate_html(patient_info, test_results):
       </table>
 
       <h2>Remidies:</h2>
-      <p></p>
+      <p>{rem}</p>
+      <h2>Medicines:</h2>
+      <p>{med}</p>
         </div>
     </div>
     <footer>
-      <p>Disclaimer: This medical report is machine predicted.</p>
+      <p>Disclaimer: This medical report is Machine predicted.</p>
     </footer>
 
     </body>
@@ -375,7 +378,10 @@ if option == "Upload Manually":
                         test['result']='Positive'
                     else:
                         test['result']='Negative'
-                html = generate_html(patient_info, test_results)
+                df=pd.read_csv("medical.csv")
+                rem=df[df['Disease']==disease]['Remedies']
+                med=df[df['Disease']==disease]['Medicines']
+                html = generate_html(patient_info, test_results,rem,med)
                 generate_pdf(html)
 
                 pdf_path = "Report/Report.pdf"
