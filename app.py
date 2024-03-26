@@ -180,7 +180,7 @@ def generate_html(patient_info, test_results,data):
           <p><b>Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['name']}</p>
           <p><b>Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['age']}</p>
           <p><b>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['gender']}</p>
-          <p><b>Mobile Number&nbsp&nbsp:</b> {patient_info['mobile']}</p>
+          <p><b>Mobile Number&nbsp:</b> {patient_info['mobile']}</p>
 
       <h2>Test Results:</h2>
       <table id="testResults">
