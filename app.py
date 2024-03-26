@@ -159,9 +159,9 @@ def generate_html(patient_info, test_results,data):
       background-color: #ffbdbd;
     }}
     footer {{
-      background-color: #003366;
+      
       color: #ffffff;
-      padding: 10px;
+      padding: 30px;
       text-align: center;
       position: fixed;
       bottom: 20%;
