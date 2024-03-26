@@ -285,47 +285,6 @@ def send_email_with_attachment(mail_id,name,pdf_path):
     
     st.success("Report Sent to Your mail")
 
-def capimg():
-    st.title("Please look at Camera 🤩")
-
-    # Create a VideoCapture object to capture video from the default camera
-    cap = cv2.VideoCapture(0)
-
-    # Check if the camera is opened successfully
-    if not cap.isOpened():
-        st.error("Error: Unable to open the camera.")
-        return
-
-    video_placeholder = st.empty()
-
-    # Display the capture button
-    capture_button = st.button("Capture Image")
-
-    while True:
-        # Capture frame-by-frame
-        ret, frame = cap.read()
-
-        if ret:
-            # Convert the frame to RGB format
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            # Convert the frame to PIL Image format
-            pil_image = Image.fromarray(frame_rgb)
-
-            # Resize the image to a smaller size
-            resized_image = pil_image.resize((100, 100))  # Adjust size as needed
-
-            # Display the live video stream
-            video_placeholder.image(resized_image, caption="Live Video Stream")
-
-            if capture_button:
-                # Display the captured image
-                st.write("### Captured Image:")
-                st.image(resized_image, caption="Captured Image")
-                break
-
-    # Release the VideoCapture object
-    cap.release()
-
 
 def model_predict():
     model = load_model('mfccall.h5')
@@ -362,7 +321,6 @@ folder_path = 'audio'  # Replace 'path_to_your_folder' with the actual folder pa
 audio_files = get_audio_files(folder_path)
 name = st.text_input("Enter your Name")
 age = st.text_input("Enter your Age")
-capimg()
 gender = st.selectbox("Select your Gender", ["---","Male", "Female", "Other"])
 mobile_number = st.text_input("Enter your Mobile Number")
 mail_id=st.text_input("Enter Your mail ID")
