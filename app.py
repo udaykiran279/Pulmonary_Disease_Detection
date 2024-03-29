@@ -123,6 +123,10 @@ def generate_html(patient_info, test_results,data):
       padding: 15px;
       text-align: center;
     }}
+    .logo {{
+      max-width: 80px;
+      max-height: 80px;
+    }}
 
     .container {{
       width: 100%;
@@ -171,7 +175,14 @@ def generate_html(patient_info, test_results,data):
     <body>
 
     <div id="header">
+      <div>
+      <img src="image/left.png" alt="Left Logo" class="logo">
+      </div>
       <h1>Medical Report</h1>
+      <div>
+      <img src="image/left.png" alt="Right Logo" class="logo">
+      </div>
+      
     </div>
 
     <div class="container">
