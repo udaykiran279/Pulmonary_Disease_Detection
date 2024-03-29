@@ -123,10 +123,6 @@ def generate_html(patient_info, test_results,data):
       padding: 15px;
       text-align: center;
     }}
-    .logo {{
-      max-width: 80px;
-      max-height: 80px;
-    }}
 
     .container {{
       width: 100%;
