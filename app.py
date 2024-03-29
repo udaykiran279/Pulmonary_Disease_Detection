@@ -115,7 +115,8 @@ def generate_html(patient_info, test_results,data):
       font-size: 14px;
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      background-color: #000;
+      color: #ffffff;
     }}
     
     #header {{
