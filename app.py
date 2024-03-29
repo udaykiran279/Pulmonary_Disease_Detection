@@ -117,11 +117,26 @@ def generate_html(patient_info, test_results,data):
       padding: 0;
     }}
 
-    #header {{
-      background-color: #003366;
-      color: #ffffff;
-      padding: 15px;
-      text-align: center;
+    header {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #f2f2f2;
+      color: #000; /* Black */
+      animation: glow 1s ease-in-out infinite alternate;
+    }}
+    .logo {{
+      max-width: 100px;
+      max-height: 100px;
+    }}
+    @keyframes glow {{
+        from {{
+            box-shadow: 0 0 10px #45B8AC; /* Black shadow */
+        }}
+        to {{
+            box-shadow: 0 0 20px #45B8AC; /* Larger black shadow */
+        }}
     }}
 
     .container {{
@@ -169,11 +184,15 @@ def generate_html(patient_info, test_results,data):
     </style>
     </head>
     <body>
-
-    <div id="header">
-      <h1>Medical Report</h1>
-    </div>
-
+    <header>
+        <div>
+            <img src="logo_left.png" alt="Left Logo" class="logo">
+        </div>
+        <h1>Medical Report</h1>
+        <div>
+            <img src="logo_right.png" alt="Right Logo" class="logo">
+        </div>
+    </header>
     <div class="container">
         <div class="content">
           <h2>Patient Information:</h2>
