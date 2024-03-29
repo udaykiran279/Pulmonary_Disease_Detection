@@ -175,9 +175,7 @@ def generate_html(patient_info, test_results,data):
     <body>
 
     <div id="header">
-      <img src="image/left.png" alt="Left Logo" class="logo">
       <h1>Medical Report</h1>
-      <img src="image/left.png" alt="Right Logo" class="logo"> 
     </div>
 
     <div class="container">
