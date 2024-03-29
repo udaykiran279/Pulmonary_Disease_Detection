@@ -106,124 +106,124 @@ def build_mfcc(file_path):
 
 def generate_html(patient_info, test_results,data):
     html = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-        <style>
-        body {{
-          font-family: Arial, sans-serif;
-          font-size: 15px;
-          margin: 0;
-          padding: 0;
-        }}
-        
-        #header {{
-          background-color: #003366;
-          color: #ffffff;
-          padding: 15px;
-          text-align: center;
-        }}
-        
-        .container {{
-          width: 100%;
-          background-color: #f2f2f2;
-          padding: 0px;
-        }}
-        
-        .content {{
-          width: 50%;
-          margin: 0 auto;
-          background-color: #fff;
-          padding: 3px;
-          box-sizing: border-box;
-        }}
-        
-        
-        table {{
-          border-collapse: collapse;
-          table-layout: auto;
-          width: 100%;
-        }}
-        
-        th, td {{
-          border: 1px solid #dddddd;
-          padding: 5px;
-          text-align: left;
-        }}
-        
-        th {{
-          background-color: #dddddd;
-          border: 1px solid #dddddd;
-          font-weight: bold;
-        }}
-        
-        .positive-result td {{
-          background-color: #ffbdbd;
-        }}
-        footer {{
-          color: black;
-          padding: 30px;
-          text-align: center;
-          width: 100%;
-        }}
-        </style>
-        </head>
-        <body>
-        
-        <div id="header">
-          <h1>Medical Report</h1>
-        </div>
-        
-        <div class="container">
-            <div class="content">
-              <h2>Patient Information:</h2>
-              <p><b>Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['name']}</p>
-              <p><b>Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['age']}</p>
-              <p><b>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['gender']}</p>
-              <p><b>Mobile Number&nbsp:</b> {patient_info['mobile']}</p>
-        
-          <h2>Test Results:</h2>
-          <table id="testResults">
-            <thead>
-              <tr>
-                <th>S.NO</th>
-                <th>Disease</th>
-                <th>Result</th>
-                <th>Severity</th>
-              </tr>
-            </thead>
-            <tbody>
-        """
-        
-        for index, result in enumerate(test_results, start=1):
-            html += f"""
-              <tr{' class="positive-result"' if result['result'] == "Positive" else ""}>
-                <td>{index}</td>
-                <td>{result['disease']}</td>
-                <td>{result['result']}</td>
-                <td>{result['severity']}</td>
-              </tr>
-            """
-        
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    body {{
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+    }}
+    
+    #header {{
+      background-color: #003366;
+      color: #ffffff;
+      padding: 15px;
+      text-align: center;
+    }}
+    
+    .container {{
+      width: 100%;
+      background-color: #f2f2f2;
+      padding: 0px;
+    }}
+    
+    .content {{
+      width: 50%;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 3px;
+      box-sizing: border-box;
+    }}
+    
+    
+    table {{
+      border-collapse: collapse;
+      table-layout: auto;
+      width: 100%;
+    }}
+    
+    th, td {{
+      border: 1px solid #dddddd;
+      padding: 5px;
+      text-align: left;
+    }}
+    
+    th {{
+      background-color: #dddddd;
+      border: 1px solid #dddddd;
+      font-weight: bold;
+    }}
+    
+    .positive-result td {{
+      background-color: #ffbdbd;
+    }}
+    footer {{
+      color: black;
+      padding: 30px;
+      text-align: center;
+      width: 100%;
+    }}
+    </style>
+    </head>
+    <body>
+    
+    <div id="header">
+      <h1>Medical Report</h1>
+    </div>
+    
+    <div class="container">
+        <div class="content">
+          <h2>Patient Information:</h2>
+          <p><b>Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['name']}</p>
+          <p><b>Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['age']}</p>
+          <p><b>Gender&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b> {patient_info['gender']}</p>
+          <p><b>Mobile Number&nbsp:</b> {patient_info['mobile']}</p>
+    
+      <h2>Test Results:</h2>
+      <table id="testResults">
+        <thead>
+          <tr>
+            <th>S.NO</th>
+            <th>Disease</th>
+            <th>Result</th>
+            <th>Severity</th>
+          </tr>
+        </thead>
+        <tbody>
+    """
+    
+    for index, result in enumerate(test_results, start=1):
         html += f"""
-            </tbody>
-          </table>
-        
-          <h2>Remedies:</h2>
-          <p>{data['rem']}</p>
-          <h2>Medicines:</h2>
-          <p>{data['med']}</p>
-            </div>
-        </div>
-        <br>
-        <footer>
-          <p><b>Disclaimer: This medical report is Machine predicted.</b></p>
-          <p> Please Contact 👉🏻<b>udaylabs27@gmail.com</b> for Support.</p>
-        </footer>
-        
-        </body>
-        </html>
+          <tr{' class="positive-result"' if result['result'] == "Positive" else ""}>
+            <td>{index}</td>
+            <td>{result['disease']}</td>
+            <td>{result['result']}</td>
+            <td>{result['severity']}</td>
+          </tr>
         """
+    
+    html += f"""
+        </tbody>
+      </table>
+    
+      <h2>Remedies:</h2>
+      <p>{data['rem']}</p>
+      <h2>Medicines:</h2>
+      <p>{data['med']}</p>
+        </div>
+    </div>
+    <br>
+    <footer>
+      <p><b>Disclaimer: This medical report is Machine predicted.</b></p>
+      <p> Please Contact 👉🏻<b>udaylabs27@gmail.com</b> for Support.</p>
+    </footer>
+    
+    </body>
+    </html>
+    """
     
     return html
 
