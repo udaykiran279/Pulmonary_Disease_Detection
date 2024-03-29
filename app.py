@@ -186,11 +186,11 @@ def generate_html(patient_info, test_results,data):
     <body>
     <header>
         <div>
-            <img src="logo_left.png" alt="Left Logo" class="logo">
+            <img src="image/left.png" alt="Left Logo" class="logo">
         </div>
         <h1>Medical Report</h1>
         <div>
-            <img src="logo_right.png" alt="Right Logo" class="logo">
+            <img src="image/left.png" alt="Right Logo" class="logo">
         </div>
     </header>
     <div class="container">
