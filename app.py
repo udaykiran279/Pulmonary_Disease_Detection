@@ -115,8 +115,6 @@ def generate_html(patient_info, test_results,data):
       font-size: 14px;
       margin: 0;
       padding: 0;
-      background-color: #000;
-      color: #ffffff;
     }}
     
     #header {{
@@ -217,6 +215,7 @@ def generate_html(patient_info, test_results,data):
       <p>{data['med']}</p>
         </div>
     </div>
+    <br>
     <br>
     <p><b><i>Disclaimer: This medical report is Machine predicted.</i></b></p>
     <br>
