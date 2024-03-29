@@ -123,21 +123,13 @@ def generate_html(patient_info, test_results,data):
       align-items: center;
       padding: 20px;
       background-color: #f2f2f2;
-      color: #000; /* Black */
-      animation: glow 1s ease-in-out infinite alternate;
+      color: #ffffff;
     }}
     .logo {{
       max-width: 100px;
       max-height: 100px;
     }}
-    @keyframes glow {{
-        from {{
-            box-shadow: 0 0 10px #45B8AC; /* Black shadow */
-        }}
-        to {{
-            box-shadow: 0 0 20px #45B8AC; /* Larger black shadow */
-        }}
-    }}
+
 
     .container {{
       width: 100%;
