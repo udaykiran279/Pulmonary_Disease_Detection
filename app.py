@@ -118,7 +118,7 @@ def generate_html(patient_info, test_results,data):
     }}
     
     #header {{
-      background-color: #55B4B0;
+      background-color: #003366;
       color: #ffffff;
       padding: 15px;
       text-align: center;
