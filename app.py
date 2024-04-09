@@ -350,11 +350,11 @@ folder_path = 'audio'  # Replace 'path_to_your_folder' with the actual folder pa
 
 # Get the list of audio files from the folder
 audio_files = get_audio_files(folder_path)
-name = st.text_input("Enter your Name")
+name = st.text_input("Enter  your  Name 👤 ")
 age = st.text_input("Enter your Age")
-gender = st.selectbox("Select your Gender", ["---","Male", "Female", "Other"])
-mobile_number = st.text_input("Enter your Mobile Number")
-mail_id=st.text_input("Enter Your mail ID")
+gender = st.selectbox("Select your Gender 🙎🏻‍♂/🙎🏻‍♀", ["---","Male", "Female", "Other"])
+mobile_number = st.text_input("Enter your Mobile Number 📞")
+mail_id=st.text_input("Enter Your mail ID 📧")
 mail_id=mail_id.lower()
 
 # Display buttons to either upload or browse audio files
