@@ -369,13 +369,14 @@ if option == "Upload Manually":
             c=1
 elif option == "Browse List":
     # Display dropdown menu to select an audio file
-    selected_audio_file = st.selectbox("Select an audio file", audio_files)
+    select_file = st.selectbox("Select an audio file", audio_files)
     # Display the selected audio file
-    save_uploaded_file(selected_audio_file, "uploaded_audio")
-    uploaded_file='uploaded_audio/audio.wav'
-    st.audio(uploaded_file, format='audio/*')
-    st.success('Audio File Uploaded')
-    c=1
+    if select_file:
+        shutil.copy(select_file, "uploaded_audio/audio.wav")
+        uploaded_file='uploaded_audio/audio.wav'
+        st.audio(uploaded_file, format='audio/*')
+        st.success('Audio File Uploaded')
+        c=1
 if c==1:
     if st.button("Generate"):
         st.pyplot(showplot(uploaded_file))
