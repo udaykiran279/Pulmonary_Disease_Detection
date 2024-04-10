@@ -359,7 +359,7 @@ mail_id=mail_id.lower()
 
 # Display buttons to either upload or browse audio files
 option = st.radio("Select an option", ("Upload Manually", "Browse List"))
-
+c=0
 # If user chooses to upload manually
 if option == "Upload Manually":
     upfile= st.file_uploader("Choose an audio file", type=["mp3", "wav"])
@@ -369,140 +369,79 @@ if option == "Upload Manually":
         if uploaded_file is not None:
             st.audio(uploaded_file, format='audio/wav')
             st.success('Audio File Uploaded')
-            if st.button("Generate"):
-                st.pyplot(showplot(uploaded_file))
-                st.success('Denoising of Audio File Started')
-                time.sleep(3)
-                raw_audio, sample_rate = librosa.load(uploaded_file, sr=4000)
-                #raw_audio, sample_rate = librosa.load(uploaded_file, sr=4000)
-                adfile=Denoise(raw_audio)
-                path='denaudio'
-                save_path=os.path.join(path,'denoise.wav')
-                write(save_path, sample_rate, adfile)
-                file='denaudio/denoise.wav'
-                build_mfcc(file)
-                st.pyplot(showplot(file))
-                st.success('Generating Log-Mel Spectograms..')
-                time.sleep(3)
-                st.pyplot(generate_spectrogram(file))
-                st.success('Generating MFCC..')
-                time.sleep(3)
-                st.pyplot(generate_mfcc(file))
-                model_pred=model_predict()
-                disease=model_pred[0]
-                sever=model_pred[1]
-                patient_info = {
-                    "name": name,
-                    "age": age,
-                    "gender": gender,
-                    "mobile": mobile_number
-                }
-                test_results = [
-                    {"disease": "COPD", "result": "", "severity": "--"},
-                    {"disease": "Asthma", "result": "", "severity": "--"},
-                    {"disease": "Bronchiectasis", "result": "", "severity": "--"},
-                    {"disease": "Bronchiolitis", "result": "", "severity": "--"},
-                    {"disease": "URTI", "result": "", "severity": "--"},
-                    {"disease": "LungFibrosis", "result": "", "severity": "--"},
-                    {"disease": "Pneumonia", "result": "", "severity": "--"}
-                ]
-                for test in test_results:
-                    if test['disease']==disease:
-                        test['result']='Positive'
-                        test['severity']=sever
-                    else:
-                        test['result']='Negative'
-                if disease!='Healthy':
-                    remedi=rem[disease]
-                    medicine=med[disease]
-                else:
-                    remedi="You are healthy,Maintain same diet and also be far from smoking as you are now."
-                    medicine="-- Not Applicable --"
-                    
-                data={
-                    "rem":remedi,
-                    "med":medicine
-                }
-                html = generate_html(patient_info, test_results,data)
-                generate_pdf(html)
-
-                pdf_path = "Report/Report.pdf"
-                with open(pdf_path, "rb") as f:
-                    pdf_bytes = f.read()
-                
-                send_email_with_attachment(mail_id,name,pdf_path)
-                time.sleep(2)
-                st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
-                
-# If user chooses to browse the list
+            c=1
 elif option == "Browse List":
     # Display dropdown menu to select an audio file
     selected_audio_file = st.selectbox("Select an audio file", audio_files)
     # Display the selected audio file
     if selected_audio_file:
-        st.audio(selected_audio_file, format='audio/*')
+        save_uploaded_file(selected_audio_file, "uploaded_audio")
+        uploaded_file='uploaded_audio/audio.wav'
+        st.audio(uploaded_file, format='audio/*')
         st.success('Audio File Uploaded')
-        if st.button("Generate"):
-            st.pyplot(showplot(selected_audio_file))
-            st.success('Denoising of Audio File Started')
-            time.sleep(3)
-            raw_audio, sample_rate = librosa.load(selected_audio_file, sr=4000)
-            adfile=Denoise(raw_audio)
-            path='denaudio'
-            save_path=os.path.join(path,'denoise.wav')
-            write(save_path, sample_rate, adfile)
-            file='denaudio/denoise.wav'
-            build_mfcc(file)
-            st.pyplot(showplot(file))
-            st.success('Generating Log-Mel Spectograms..')
-            time.sleep(3)
-            st.pyplot(generate_spectrogram(file))
-            st.success('Generating MFCC..')
-            time.sleep(3)
-            st.pyplot(generate_mfcc(file))
-            model_pred=model_predict()
-            disease=model_pred[0]
-            sever=model_pred[1]
-            patient_info = {
-                "name": name,
-                "age": age,
-                "gender": gender,
-                "mobile": mobile_number
-            }
-            test_results = [
-                {"disease": "COPD", "result": "", "severity": "--"},
-                {"disease": "Asthma", "result": "", "severity": "--"},
-                {"disease": "Bronchiectasis", "result": "", "severity": "--"},
-                {"disease": "Bronchiolitis", "result": "", "severity": "--"},
-                {"disease": "URTI", "result": "", "severity": "--"},
-                {"disease": "LungFibrosis", "result": "", "severity": "--"},
-                {"disease": "Pneumonia", "result": "", "severity": "--"}
-            ]
-            for test in test_results:
-                if test['disease']==disease:
-                    test['result']='Positive'
-                    test['severity']=sever
-                else:
-                    test['result']='Negative'
-            if disease!='Healthy':
-                remedi=rem[disease]
-                medicine=med[disease]
+        c=1
+if c==1:
+    if st.button("Generate"):
+        st.pyplot(showplot(uploaded_file))
+        st.success('Denoising of Audio File Started')
+        time.sleep(3)
+        raw_audio, sample_rate = librosa.load(uploaded_file, sr=4000)
+        #raw_audio, sample_rate = librosa.load(uploaded_file, sr=4000)
+        adfile=Denoise(raw_audio)
+        path='denaudio'
+        save_path=os.path.join(path,'denoise.wav')
+        write(save_path, sample_rate, adfile)
+        file='denaudio/denoise.wav'
+        build_mfcc(file)
+        st.pyplot(showplot(file))
+        st.success('Generating Log-Mel Spectograms..')
+        time.sleep(3)
+        st.pyplot(generate_spectrogram(file))
+        st.success('Generating MFCC..')
+        time.sleep(3)
+        st.pyplot(generate_mfcc(file))
+        model_pred=model_predict()
+        disease=model_pred[0]
+        sever=model_pred[1]
+        patient_info = {
+            "name": name,
+            "age": age,
+            "gender": gender,
+            "mobile": mobile_number
+        }
+        test_results = [
+            {"disease": "COPD", "result": "", "severity": "--"},
+            {"disease": "Asthma", "result": "", "severity": "--"},
+            {"disease": "Bronchiectasis", "result": "", "severity": "--"},
+            {"disease": "Bronchiolitis", "result": "", "severity": "--"},
+            {"disease": "URTI", "result": "", "severity": "--"},
+            {"disease": "LungFibrosis", "result": "", "severity": "--"},
+            {"disease": "Pneumonia", "result": "", "severity": "--"}
+        ]
+        for test in test_results:
+            if test['disease']==disease:
+                test['result']='Positive'
+                test['severity']=sever
             else:
-                remedi="You are healthy,Maintain same diet and also be far from smoking as you are now."
-                medicine="-- Not Applicable --"
-                
-            data={
-                "rem":remedi,
-                "med":medicine
-            }
-            html = generate_html(patient_info, test_results,data)
-            generate_pdf(html)
-
-            pdf_path = "Report/Report.pdf"
-            with open(pdf_path, "rb") as f:
-                pdf_bytes = f.read()
+                test['result']='Negative'
+        if disease!='Healthy':
+            remedi=rem[disease]
+            medicine=med[disease]
+        else:
+            remedi="You are healthy,Maintain same diet and also be far from smoking as you are now."
+            medicine="-- Not Applicable --"
             
-            send_email_with_attachment(mail_id,name,pdf_path)
-            time.sleep(2)
-            st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
+        data={
+            "rem":remedi,
+            "med":medicine
+        }
+        html = generate_html(patient_info, test_results,data)
+        generate_pdf(html)
 
+        pdf_path = "Report/Report.pdf"
+        with open(pdf_path, "rb") as f:
+            pdf_bytes = f.read()
+        c=0
+        send_email_with_attachment(mail_id,name,pdf_path)
+        time.sleep(2)
+        st.download_button(label="Download Report", data=pdf_bytes, file_name=f"{name}_Report.pdf", mime="application/pdf")
