@@ -249,7 +249,7 @@ def send_email_with_attachment(mail_id,name,pdf_path):
     body = f"""
     Dear {name},
     
-    Thank you for visiting Uday Labs. Please find the attached medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any questions or require further information, please do not hesitate to contact me.
+    Thank you for visiting Uday Labs. Please find the attached medical report for {name} tested on {current_datetime.strftime("%Y-%m-%d")} at {current_datetime.strftime("%H:%M:%S")}. If you have any queires or require further information, please do not hesitate to contact us.
     
     Best regards,
     Uday Labs
@@ -299,8 +299,6 @@ def model_predict():
     img_array = preprocess_input(img_array)
     # Extract features from the test image using VGG16
     features = vgg16.predict(img_array)
-
-
     # Make prediction using the trained LSTM model
     prediction = model.predict(features.reshape((features.shape[0], -1, features.shape[-1])))
     # Convert prediction probabilities to class labels
@@ -373,12 +371,11 @@ elif option == "Browse List":
     # Display dropdown menu to select an audio file
     selected_audio_file = st.selectbox("Select an audio file", audio_files)
     # Display the selected audio file
-    if selected_audio_file:
-        save_uploaded_file(selected_audio_file, "uploaded_audio")
-        uploaded_file='uploaded_audio/audio.wav'
-        st.audio(uploaded_file, format='audio/*')
-        st.success('Audio File Uploaded')
-        c=1
+    save_uploaded_file(selected_audio_file, "uploaded_audio")
+    uploaded_file='uploaded_audio/audio.wav'
+    st.audio(uploaded_file, format='audio/*')
+    st.success('Audio File Uploaded')
+    c=1
 if c==1:
     if st.button("Generate"):
         st.pyplot(showplot(uploaded_file))
