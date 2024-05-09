@@ -357,10 +357,7 @@ gender = st.selectbox("Select your Gender 🙎🏻‍♂/🙎🏻‍♀", ["---"
 mobile_number = st.text_input("Enter your Mobile Number 📞")
 mail_id=st.text_input("Enter Your mail ID 📧")
 mail_id=mail_id.lower()
-if not validate_email(mail_id):
-    st.success("Enter correct Mail ID")
-else:
-    # Display buttons to either upload or browse audio files
+if validate_email(mail_id):
     option = st.radio("Select an option", ("Upload Manually", "Browse List"))
     c=0
     # If user chooses to upload manually
@@ -383,6 +380,8 @@ else:
             st.audio(uploaded_file, format='audio/*')
             st.success('Audio File Uploaded')
             c=1
+else:
+    st.success("Enter correct Mail ID")
 if c==1:
     if st.button("Generate"):
         st.pyplot(showplot(uploaded_file))
