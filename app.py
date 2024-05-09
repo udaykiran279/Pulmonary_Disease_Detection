@@ -356,33 +356,37 @@ name = st.text_input("Enter  your  Name 👤 ")
 age = st.text_input("Enter your Age")
 gender = st.selectbox("Select your Gender 🙎🏻‍♂/🙎🏻‍♀", ["---","Male", "Female", "Other"])
 mobile_number = st.text_input("Enter your Mobile Number 📞")
-mail_id=st.text_input("Enter Your mail ID 📧")
-mail_id=mail_id.lower()
-if validate_email(mail_id):
-    option = st.radio("Select an option", ("Upload Manually", "Browse List"))
-    c=0
-    # If user chooses to upload manually
-    if option == "Upload Manually":
-        upfile= st.file_uploader("Choose an audio file", type=["mp3", "wav"])
-        if upfile:
-            save_uploaded_file(upfile, "uploaded_audio")
-            uploaded_file='uploaded_audio/audio.wav'
-            if uploaded_file is not None:
-                st.audio(uploaded_file, format='audio/wav')
+m=0
+if m==0:
+    mail_id=st.text_input("Enter Your mail ID 📧")
+    mail_id=mail_id.lower()
+    m=1
+if m==1:
+    if validate_email(mail_id):
+        option = st.radio("Select an option", ("Upload Manually", "Browse List"))
+        c=0
+        # If user chooses to upload manually
+        if option == "Upload Manually":
+            upfile= st.file_uploader("Choose an audio file", type=["mp3", "wav"])
+            if upfile:
+                save_uploaded_file(upfile, "uploaded_audio")
+                uploaded_file='uploaded_audio/audio.wav'
+                if uploaded_file is not None:
+                    st.audio(uploaded_file, format='audio/wav')
+                    st.success('Audio File Uploaded')
+                    c=1
+        elif option == "Browse List":
+            # Display dropdown menu to select an audio file
+            select_file = st.selectbox("Select an audio file", audio_files)
+            # Display the selected audio file
+            if select_file:
+                shutil.copy(select_file, "uploaded_audio/audio.wav")
+                uploaded_file='uploaded_audio/audio.wav'
+                st.audio(uploaded_file, format='audio/*')
                 st.success('Audio File Uploaded')
                 c=1
-    elif option == "Browse List":
-        # Display dropdown menu to select an audio file
-        select_file = st.selectbox("Select an audio file", audio_files)
-        # Display the selected audio file
-        if select_file:
-            shutil.copy(select_file, "uploaded_audio/audio.wav")
-            uploaded_file='uploaded_audio/audio.wav'
-            st.audio(uploaded_file, format='audio/*')
-            st.success('Audio File Uploaded')
-            c=1
-else:
-    st.success("Enter correct Mail ID")
+    else:
+        st.success("Enter correct Mail ID")
 if c==1:
     if st.button("Generate"):
         st.pyplot(showplot(uploaded_file))
